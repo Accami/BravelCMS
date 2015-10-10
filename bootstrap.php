@@ -1,22 +1,22 @@
 <?php
 
-// Константы
+// РљРѕРЅСЃС‚Р°РЅС‚С‹
 define('INC_CHECK', true);
 define('BASE', str_replace('\\', '/', dirname(__FILE__)).'/');
 define('PHPLIBS', BASE."libs/php/");
 define('CONFIGS', BASE."data/configs/");
 define('URI', "http://".$_SERVER['HTTP_HOST']);
 
-// Проверка параметров сервера
+// РџСЂРѕРІРµСЂРєР° РїР°СЂР°РјРµС‚СЂРѕРІ СЃРµСЂРІРµСЂР°
 $phpversion = explode('.', phpversion());
 $phpversion = $phpversion[0].'.'.$phpversion[1];
 if($phpversion > '5.2' || $phpversion == '5.2') {
 	// ok...
-} else { die('Ошибка! Версия PHP ниже <b>5.2</b>!'); }
+} else { die('РћС€РёР±РєР°! Р’РµСЂСЃРёСЏ PHP РЅРёР¶Рµ <b>5.2</b>!'); }
 $extensions = array('cURL', 'GD', 'iconv');
-foreach($extensions as $extension) { if(!extension_loaded($extension)) { die('Ошибка! Расширение "<b>'.$extension.'</b>" не установлено!'); } }
+foreach($extensions as $extension) { if(!extension_loaded($extension)) { die('РћС€РёР±РєР°! Р Р°СЃС€РёСЂРµРЅРёРµ "<b>'.$extension.'</b>" РЅРµ СѓСЃС‚Р°РЅРѕРІР»РµРЅРѕ!'); } }
 
-// Подключаем библиотеки 
+// РџРѕРґРєР»СЋС‡Р°РµРј Р±РёР±Р»РёРѕС‚РµРєРё 
 $phplibs = array(
 	'utils.class.php',
 	'pdo.class.php',

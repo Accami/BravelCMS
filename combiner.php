@@ -1,6 +1,6 @@
 <?php
 
-// Открываем соединение с базой данных
+// РћС‚РєСЂС‹РІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ СЃ Р±Р°Р·РѕР№ РґР°РЅРЅС‹С…
 Database::connect($db_config['host'], $db_config['user'], $db_config['pass'], $db_config['base']);
 
 
@@ -12,7 +12,7 @@ if ($action == "admin") {
 	View::setPath('view/');
 }
 
-// Загрузка нужной модели
+// Р—Р°РіСЂСѓР·РєР° РЅСѓР¶РЅРѕР№ РјРѕРґРµР»Рё
 switch ($action) {
 	case "admin":
 		Model::load('admin');
@@ -21,7 +21,7 @@ switch ($action) {
 		Model::load('default');
 }
 
-// Обработка системных переменных в шаблоне
+// РћР±СЂР°Р±РѕС‚РєР° СЃРёСЃС‚РµРјРЅС‹С… РїРµСЂРµРјРµРЅРЅС‹С… РІ С€Р°Р±Р»РѕРЅРµ
 $parse_array = array(
 	'main' => array(
 		'{title}' => "dsdfdfd"
@@ -30,10 +30,10 @@ $parse_array = array(
 
 View::parse('str', array_keys($parse_array['main']), array_values($parse_array['main']));
 
-// Компилируем шаблон
+// РљРѕРјРїРёР»РёСЂСѓРµРј С€Р°Р±Р»РѕРЅ
 echo View::compile();
 
-// Закрываем соединение с базой данных
+// Р—Р°РєСЂС‹РІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ СЃ Р±Р°Р·РѕР№ РґР°РЅРЅС‹С…
 Database::close();
 
 

@@ -37,4 +37,3 @@ echo View::compile();
 Database::close();
 
 
-?>

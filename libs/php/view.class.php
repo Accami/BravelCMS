@@ -12,6 +12,10 @@ class View {
 		self::$path = $path;
 	}
 	
+	public function getPath() {
+		return self::$path;
+	}
+	
 	public static function load($file, $exactly = 1) {
 		if(!empty($exactly)) {
 			if(self::$path != '') {

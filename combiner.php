@@ -24,7 +24,9 @@ switch ($action) {
 // Обработка системных переменных в шаблоне
 $parse_array = array(
 	'main' => array(
-		'{title}' => "dsdfdfd"
+		'{title}' => Database::getParam("site_name")." / ".Model::getTitle(),
+		'{info}' => Model::getInfo(),
+		'{theme}' => View::getPath()
 	)
 );
 

@@ -19,7 +19,7 @@ foreach($extensions as $extension) { if(!extension_loaded($extension)) { die('О
 // Подключаем библиотеки 
 $phplibs = array(
 	'utils.class.php',
-	'pdo.class.php',
+	'database.class.php',
 	'model.class.php',
 	'user.class.php',
 	'router.class.php',

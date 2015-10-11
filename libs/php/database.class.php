@@ -20,6 +20,19 @@ class Database {
 		} catch(PDOException $e) { die('Database connection error:<br>'.PHP_EOL.'<b>'.$e->getMessage().'</b>'); }
 	}
 	
+	public static function getParam($param) {
+		global $db_config;
+		$query = self::query("SELECT * FROM `".$db_config["prefix"]."_settings` WHERE `name` = '".$param."'");
+		
+		if (self::num_rows($query) > 0) {
+			$array = self::fetch_array($query);
+			return $array["value"];
+		}else {
+			exit("ERROR: Undefined setting");
+		}
+		
+	}
+	
 	public static function query($string) { try { return self::$db->query($string); } catch(PDOException $e) { echo $e->getMessage(); } }
 	
 	public static function result($object) { try { return $object->fetchColumn(); } catch(PDOException $e) { echo $e->getMessage(); } }

@@ -162,3 +162,24 @@ body {
 	cursor: pointer;
 	padding: 5px 15px;
 }
+.error {
+	margin: 5px;
+	padding: 10px;
+	background-color: #FF9F9F;
+    color: #6D1414;
+	border: 1px solid #F77B7B;
+}
+.info {
+	margin: 5px;
+	padding: 10px;
+    background-color: #9FDDFF;
+    color: #14266D;
+    border: 1px solid #7BBFF7;
+}
+.success {
+	margin: 5px;
+	padding: 10px;
+	background-color: #A2FF9F;
+    color: #146D45;
+    border: 1px solid #67D49B;
+}

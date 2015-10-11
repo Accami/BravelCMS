@@ -22,7 +22,7 @@
 	<div class="header">
 		<div class="logo">BravelCMS</div>
 	</div>
-	
+	{info}
 	<form action="" method="POST">
 		<p><label>Логин: </label><input class="right" type="text" /></p>
 		<p><label>Пароль: </label><input class="right" type="password" /></p>

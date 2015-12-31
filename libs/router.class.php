@@ -3,18 +3,17 @@
 class Router {
 
   static private $_instance = null;
-  static private $route = 'index';
 
   /**
-   * Èñêëþ÷àåò XSS óÿçâèìîñòè äëÿ âåõ ïîëüçîâàòåëüñêèõ äàííûõ.
-   * Ñîõðàíÿåò âñå ïåðåäàííûå ïàðàìåòðû â ðååñòð queryParams,
-   * â äàëüíåéøåì äîñòóïíûé èç ëþáîé òî÷êè ïðîãðàììû.
-   * Âûÿâëÿåò ÷àñòü ïóòè â ññûëêàõ, ïî $_SERVER['SCRIPT_NAME'],
-   * êîòîðàÿ íå äîëæíà ó÷èòûâàòüñÿ ïðè âûáîðå êîíòðîëåðà.
-   * Àêòóàëüíî êîãäà ôàéëû äâèæêà ëåæàò íå â êîðíå ñàéòà.
+   * Ð˜ÑÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ XSS ÑƒÑÐ·Ð²Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ð´Ð»Ñ Ð²ÐµÑ… Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÐ¸Ñ… Ð´Ð°Ð½Ð½Ñ‹Ñ….
+   * Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÑÐµÑ‚ Ð²ÑÐµ Ð¿ÐµÑ€ÐµÐ´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ñ‹ Ð² Ñ€ÐµÐµÑÑ‚Ñ€ queryParams,
+   * Ð² Ð´Ð°Ð»ÑŒÐ½ÐµÐ¹ÑˆÐµÐ¼ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ð¹ Ð¸Ð· Ð»ÑŽÐ±Ð¾Ð¹ Ñ‚Ð¾Ñ‡ÐºÐ¸ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñ‹.
+   * Ð’Ñ‹ÑÐ²Ð»ÑÐµÑ‚ Ñ‡Ð°ÑÑ‚ÑŒ Ð¿ÑƒÑ‚Ð¸ Ð² ÑÑÑ‹Ð»ÐºÐ°Ñ…, Ð¿Ð¾ $_SERVER['SCRIPT_NAME'],
+   * ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Ñ Ð½Ðµ Ð´Ð¾Ð»Ð¶Ð½Ð° ÑƒÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒÑÑ Ð¿Ñ€Ð¸ Ð²Ñ‹Ð±Ð¾Ñ€Ðµ ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÐµÑ€Ð°.
+   * ÐÐºÑ‚ÑƒÐ°Ð»ÑŒÐ½Ð¾ ÐºÐ¾Ð³Ð´Ð° Ñ„Ð°Ð¹Ð»Ñ‹ Ð´Ð²Ð¸Ð¶ÐºÐ° Ð»ÐµÐ¶Ð°Ñ‚ Ð½Ðµ Ð² ÐºÐ¾Ñ€Ð½Ðµ ÑÐ°Ð¹Ñ‚Ð°.
    */
   private function __construct() {
-    
+
     if (get_magic_quotes_gpc()) {
       $_REQUEST = System::stripslashesArray($_REQUEST);
       $_POST = System::stripslashesArray($_POST);
@@ -24,20 +23,20 @@ class Router {
     $_REQUEST = System::defenderXss($_REQUEST, $emulMgOff);
     $_POST = System::defenderXss($_POST, $emulMgOff);
     $_GET = System::defenderXss($_GET, $emulMgOff);
-	
+
 	$this->queryParams = $_REQUEST;
   }
 
   private function __clone() {
-    
+
   }
 
   private function __wakeup() {
-    
+
   }
 
   /**
-   * Âîçâðàùåò çàùèùåííûé ïàðàìåòð èç ìàññèâà $_GET.
+   * Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰ÐµÑ‚ Ð·Ð°Ñ‰Ð¸Ñ‰ÐµÐ½Ð½Ñ‹Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° $_GET.
    * @return object
    */
   public static function get($param) {
@@ -45,17 +44,17 @@ class Router {
   }
 
   /**
-   * Âîçâðàùàåò çàùèùåííûé ïàðàìåòð èç $_POST ìàññèâà.
+   * Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð·Ð°Ñ‰Ð¸Ñ‰ÐµÐ½Ð½Ñ‹Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ Ð¸Ð· $_POST Ð¼Ð°ÑÑÐ¸Ð²Ð°.
    * @return string
-   * @param string $param çàïðîøåíûé ïàðàìåòð.
+   * @param string $param Ð·Ð°Ð¿Ñ€Ð¾ÑˆÐµÐ½Ñ‹Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€.
    */
   public static function post($param) {
     return self::getQueryParametr($param);
   }
-  
+
   /**
-   * Âîçâðàùåò åäèíñòâåííûé ýêçåìïëÿð äàííîãî êëàññà.
-   * @return object - îáúåêò êëàññà URL.
+   * Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰ÐµÑ‚ ÐµÐ´Ð¸Ð½ÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ð¹ ÑÐºÐ·ÐµÐ¼Ð¿Ð»ÑÑ€ Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ ÐºÐ»Ð°ÑÑÐ°.
+   * @return object - Ð¾Ð±ÑŠÐµÐºÑ‚ ÐºÐ»Ð°ÑÑÐ° URL.
    */
   static public function getInstance() {
     if (is_null(self::$_instance)) {
@@ -65,7 +64,7 @@ class Router {
   }
 
   /**
-   * Âîâçðàùàåò çàïðîøåííûé request ïàðàìåòð.
+   * Ð’Ð¾Ð²Ð·Ñ€Ð°Ñ‰Ð°ÐµÑ‚ Ð·Ð°Ð¿Ñ€Ð¾ÑˆÐµÐ½Ð½Ñ‹Ð¹ request Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€.
    * @return type
    */
   public static function getQueryParametr($param) {
@@ -75,7 +74,7 @@ class Router {
   }
 
   /**
-   * Èíèöèàëèçèðóåò äàííûé êëàññ URL.
+   * Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ Ð´Ð°Ð½Ð½Ñ‹Ð¹ ÐºÐ»Ð°ÑÑ URL.
    * @return void
    */
   public static function init() {
@@ -83,9 +82,9 @@ class Router {
   }
 
   /**
-   * Óñòàíàâëèâàåò ïàðàìåòð â ðååñòð URL. Ìîæíî èñïîëüçîâàòü êàê ðååñòð ïåðåìåííûõ.
-   * @param string $param íàèìåíîâàíèå ïàðàìåòðà.
-   * $value string $param çíà÷åíèå ïàðàìåòðà.
+   * Ð£ÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ Ð² Ñ€ÐµÐµÑÑ‚Ñ€ URL. ÐœÐ¾Ð¶Ð½Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ°Ðº Ñ€ÐµÐµÑÑ‚Ñ€ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ….
+   * @param string $param Ð½Ð°Ð¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°.
+   * $value string $param Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°.
    */
   public static function setQueryParametr($param, $value) {
     self::getInstance()->queryParams[$param] = $value;

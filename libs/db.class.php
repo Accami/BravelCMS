@@ -17,9 +17,9 @@ class DB {
 	  $port = $hostAndPort[1];
 	  $host = $hostAndPort[0];
 	}
-		
+
     self::$connection = new mysqli($host, $db_config['user'], $db_config['password'], $db_config['db'], $port);
-		
+
     if (self::$connection->connect_error) {
       die('Ошибка подключения ('.self::$connection->connect_errno.') '
         .self::$connection->connect_error);
@@ -27,67 +27,11 @@ class DB {
   }
 
   private function __clone() {
-    
+
   }
 
   private function __wakeup() {
-    
-  }
 
-  /**
-   * Строит часть запроса, из полученного ассоциаливного массива.
-   * Обычно используется для оператора SET.
-   * Пример:
-   * <code>   
-   * $array = (
-   *   'login' => 'admin',
-   *   'pass' => '1',
-   * );
-   * // преобразует массив в строку: "'login' = 'admin', 'pass' = '1'"
-   * DB::buildPartQuery($array); 
-   * </code>  
-   * @param array $array ассоциативный массив полей с данными.
-   * @param string $devide разделитель.
-   *
-   * @return string
-   */
-  public static function buildPartQuery($array, $devide = ',') {
-    $partQuery = '';
-
-    if (is_array($array)) {
-      $partQuery = '';
-      foreach ($array as $index => $value) {     
-        $partQuery .= ' `'.self::quote($index,true).'` = "'.self::quote($value,true).'"'.$devide;
-      }
-      $partQuery = trim($partQuery, $devide);     
-    }
-    return $partQuery;
-  }
-
-  /**
-   * Аналогичен методу buildPartQuery, но используется для целого запроса.
-   * Как правило для WHERE.
-   *
-   * @param string SQL запрос.
-   * @param array $array ассоциативный массив.
-   * @param string $devide разделитель
-   * @return obj|bool
-   */
-  public static function buildQuery($query, $array, $devide = ',') {
-
-    if (is_array($array)) {
-      $partQuery = '';
-
-      foreach ($array as $index => $value) {        
-        $partQuery .= ' `'.self::quote($index,true).'` = "'.self::quote($value,true).'"'.$devide;
-      }
-
-      $partQuery = trim($partQuery, $devide);
-      $query .= $partQuery;
-
-      return self::query($query);
-    }
-    return false;
   }
 
   /**
@@ -179,7 +123,7 @@ class DB {
       $obj->count_sql++;
 
       $startTimeSql = microtime(true);
-      $result = mysqli_query(self::$connection, $sql) 
+      $result = mysqli_query(self::$connection, $sql)
         or die(self::console('<br/><span style="color:red">Ошибка в SQL запросе: '
           . '</span><span style="color:blue">'.$sql.'</span> <br/> '
           . '<span style="color:red">'.mysqli_error(self::$connection).'</span>'));

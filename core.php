@@ -18,7 +18,7 @@ Router::init();
 
 echo Router::get('name');
 
-// Считаем время загрузки
+// Считаем время загрузк
 $time = microtime();
 $time = explode(' ', $time);
 $time = $time[1] + $time[0];

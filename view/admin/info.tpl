@@ -1,1 +1,0 @@
-<div class="[info]info[/info][success]success[/success][error]error[/error]">{info}</div>

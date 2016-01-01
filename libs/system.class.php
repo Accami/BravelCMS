@@ -43,6 +43,16 @@ class System {
     return self::getInstance()->_registry['settings'][$name];
   }
 
+  public static function viewCompile($include) {
+    if ($_SESSION['disp_template']) {
+      ob_start();
+        include BASE."/templates/".self::getSetting('template')."/".$include;
+        $content = ob_get_contents();
+      ob_end_clean();
+    }
+    return $content;
+  }
+
   /**
    * Защита от XSS атак полученный массив параметров.
    *
@@ -129,6 +139,10 @@ class System {
       self::set("settings", $settings);
     }
 
+  }
+
+  public static function displayTemplate($display) {
+    $_SESSION['disp_template'] = $display;
   }
 
   /**

@@ -44,8 +44,11 @@ class System {
   }
 
   public static function viewCompile($include) {
+    $content = "";
+    $data = array();
     if ($_SESSION['disp_template']) {
       ob_start();
+        $data = self::get('data');
         include BASE."/templates/".self::getSetting('template')."/".$include;
         $content = ob_get_contents();
       ob_end_clean();
@@ -104,6 +107,10 @@ class System {
    */
   static public function set($key, $object) {
     self::getInstance()->_registry[$key] = $object;
+  }
+
+  public function setData($key, $value) {
+    self::set('data', array($key => $value));
   }
 
   /**

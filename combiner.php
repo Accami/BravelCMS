@@ -6,7 +6,6 @@ require_once "db-config.php";
 require_once "libs/system.class.php";
 require_once "libs/router.class.php";
 require_once "libs/db.class.php";
-require_once "libs/controller.class.php";
 require_once "libs/core.class.php";
 
 DB::init();

@@ -63,6 +63,16 @@ class Router {
     return self::$_instance;
   }
 
+  public function getController() {
+    $url = self::get('url');
+    $url = explode('/', $url);
+    if ($url[0] == "") {
+      return 'index';
+    }else {
+      return $url[0];
+    }
+  }
+
   /**
    * Вовзращает запрошенный request параметр.
    * @return type
